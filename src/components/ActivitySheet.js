@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import ActivityRow from './ActivityRow'
 
 function daysInThisMonth() {
@@ -18,32 +17,26 @@ export default class ActivitySheet extends React.Component {
 
 
   render() {
-    const rows = []
-    const activeDaysMap = {}
-    this.props.activeDays.forEach(activeDay => {
-      activeDaysMap[activeDay.date.join('-')] = activeDay
-    });
-
-    for (let i = 0; i < daysInThisMonth(...this.props.month); i += 1) {
-      const day = this.props.month.concat([i + 1])
-      const activeDay = activeDaysMap[day.join('-')]
-
-      rows.push(
-        <ActivityRow
-          
-          date = {day}
-          project = {activeDay ? activeDay.project : null}
-          start = {activeDay ? activeDay.start : null}
-          end = {activeDay ? activeDay.end : null}
-          pause = {activeDay ? activeDay.pause : null}
-          comment = {activeDay ? activeDay.comment : null}
+    let rows = null;
+    rows = (
+      <div>
+        {this.props.activeDays.map((day, index) => {
+          return <ActivityRow
+          date = {day.date}
+          project = {day.project}
+          start = {day.start}
+          end = {day.end}
+          pause = {day.pause}
+          comment = {day.comment}
           
           handleChangedCell={this.handleChangedCell}
           updateCells={this.updateCells}
-          key={i}
-        />,
-      )
-    }
+          key={index}
+        />
+        })}
+      </div>
+    )
+    
     return (
       <div>
         {rows}

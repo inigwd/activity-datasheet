@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 // import PropTypes from 'prop-types'
 import DateCell from './DateCell'
 import TextCell from './TextCell'
@@ -7,56 +7,56 @@ import TotalCell from './TotalCell'
 
 // import Cell from './Cell'
 export default class ActivityRow extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleProjectChange = this.handleProjectChange.bind(this);
-    this.handleCommentChange = this.handleCommentChange.bind(this);
-    this.handleStartChange = this.handleStartChange.bind(this);
-    this.state = { 
-      date : this.props.date,
-      project : this.props.project,
-      start : this.props.start,
-      end : this.props.end,
-      pause : this.props.pause,
-      total: '',
-      comment : this.props.comment
-     }
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.handleProjectChange = this.handleProjectChange.bind(this);
+  //   this.handleCommentChange = this.handleCommentChange.bind(this);
+  //   this.handleStartChange = this.handleStartChange.bind(this);
+  //   this.state = { 
+  //     date : this.props.date,
+  //     project : this.props.project,
+  //     start : this.props.start,
+  //     end : this.props.end,
+  //     pause : this.props.pause,
+  //     total: '',
+  //     comment : this.props.comment
+  //    }
+  // }
 
-  handleProjectChange(input) {
-    this.setState({ project: input })
-  }
-  handleCommentChange(input) {
-    this.setState({ comment: input })
-  }
-  handleStartChange(input) {
-    this.setState({ start: input })
-  }
+  // handleProjectChange(input) {
+  //   this.setState({ project: input })
+  // }
+  // handleCommentChange(input) {
+  //   this.setState({ comment: input })
+  // }
+  // handleStartChange(input) {
+  //   this.setState({ start: input })
+  // }
 
 
   render() {
-    const date = showDate(this.state.date);
-    const project = this.state.project;
-    const start = this.state.start;
-    const end = this.state.end;
-    const pause = this.state.pause;
-    // const total = calculateTotalTime(start.join(','),end.join(','),pause.join(','));
-    const comment = this.state.comment;
+    // const date = showDate(this.state.date);
+    // const project = this.state.project;
+    // const start = this.state.start;
+    // const end = this.state.end;
+    // const pause = this.state.pause;
+    const total = [0,0]//calculateTotalTime(start.join(','),end.join(','),pause.join(','));
+    // const comment = this.state.comment;
 
     return (
       <div>
         <DateCell
-          value={date}
+          value={this.props.date}
         />
         <TextCell
-          value={project}
-          onTextInput={this.handleProjectChange}
+          value={this.props.project}
+          // onTextInput={this.handleProjectChange}
         />
-        <TimeCell value={start} />
-        <TimeCell value={end} />
-        <TimeCell value={pause} />
-        {/* <TotalCell total={total} /> */}
-        <TextCell value={comment} />
+        <TimeCell value={this.props.start} />
+        <TimeCell value={this.props.end} />
+        <TimeCell value={this.props.pause} />
+        <TotalCell total={total} />
+        <TextCell value={this.props.comment} />
       </div>
     )
   }
