@@ -10,7 +10,6 @@ export default class TextCell extends React.Component {
           this.props.onTextInput(e.target.value)
       }
     render(){
-        const value = this.props.value;
     return (
         <section>
             <input
@@ -18,7 +17,7 @@ export default class TextCell extends React.Component {
                 // type="text"
                 // onBlur={this.onBlur}
                 // onKeyPress={this.onKeyPressOnInput}
-                value={value}
+                value={this.props.value}
                 onChange={this.handleChange}
                 autoFocus
             />
