@@ -11,14 +11,14 @@ export default class App extends React.Component {
     this.state = {
       activeDays: [new ActiveDay(
         [2019, 8, 1],
-        "Hann-Rück/Reflex",
+        "Projekt Name",
         [8, 0],
         [17, 0],
         [0, 30],
         'Core QA Scrum'),
       new ActiveDay(
         [2019, 8, 3],
-        "Hann-Rück/Reflex",
+        "Projekt Name",
         [8, 0],
         [16, 0],
         [1, 0],
@@ -63,10 +63,7 @@ handleStartChange = e => {
         if (activeDays[i].date[2] === e.date[2]) {
           foundday = true;
           //else create new activeDay 
-          activeDays[i].start = e.start.split(':').map(el => {
-            let n = Number(el);
-            return n === 0 ? n : n || el;
-          });
+          activeDays[i].start = e.start
           break
         }
       }
@@ -74,10 +71,7 @@ handleStartChange = e => {
   }
   if (!foundday) {
     //else create new activeDay 
-    activeDays.push(new ActiveDay(e.date, null, e.start.split(':').map(el => {
-      let n = Number(el);
-      return n === 0 ? n : n || el;
-    }), null, null, null))
+    activeDays.push(new ActiveDay(e.date, null, e.start, null, null, null))
   }
   //set new State
   this.setState({ activeDays: activeDays })
@@ -94,10 +88,7 @@ handleEndChange = e => {
         if (activeDays[i].date[2] === e.date[2]) {
           foundday = true;
           //else create new activeDay 
-          activeDays[i].end = e.end.split(':').map(el => {
-            let n = Number(el);
-            return n === 0 ? n : n || el;
-          });
+          activeDays[i].end = e.end
           break
         }
       }
@@ -105,10 +96,7 @@ handleEndChange = e => {
   }
   if (!foundday) {
     //else create new activeDay 
-    activeDays.push(new ActiveDay(e.date, null, null, e.end.split(':').map(el => {
-      let n = Number(el);
-      return n === 0 ? n : n || el;
-    }), null, null))
+    activeDays.push(new ActiveDay(e.date, null, null, e.end, null, null))
   }
   //set new State
   this.setState({ activeDays: activeDays })
@@ -125,10 +113,7 @@ handlePauseChange = e => {
         if (activeDays[i].date[2] === e.date[2]) {
           foundday = true;
           //else create new activeDay 
-          activeDays[i].pause = e.pause.split(':').map(el => {
-            let n = Number(el);
-            return n === 0 ? n : n || el;
-          })
+          activeDays[i].pause = e.pause
           break
         }
       }
@@ -136,10 +121,7 @@ handlePauseChange = e => {
   }
   if (!foundday) {
     //else create new activeDay 
-    activeDays.push(new ActiveDay(e.date, null, null, null, e.pause.split(':').map(el => {
-      let n = Number(el);
-      return n === 0 ? n : n || el;
-    }), null))
+    activeDays.push(new ActiveDay(e.date, null, null, null, e.pause, null))
   }
   //set new State
   this.setState({ activeDays: activeDays })
@@ -171,22 +153,9 @@ handlePauseChange = e => {
     this.setState({ activeDays: activeDays })
   }
 
-  
-  // //changeHandler
-  // handleCommentChange(input) {
-  //   this.setState({ comment: input })
-  // }
-  // handleStartChange(input) {
-  //   this.setState({ start: input })
-  // }
-  // handleEndChange(input) {
-  //   this.setState({ end: input })
-  // }
-  // handlePauseChange(input) {
-  //   this.setState({ pause: input })
-  // }
 
   render() {
+
     const month = [
       currentMonth.getFullYear(),
       currentMonth.getMonth() + 1]
