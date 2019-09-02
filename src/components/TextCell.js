@@ -3,35 +3,43 @@ import React from 'react';
 export default class TextCell extends React.Component {
     constructor(props) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
+        this.state = { selected: false }
+    }
+    handleFocus = (event) => event.target.select();
+
+    handleClick() {
+        this.setState({ selected: !this.state.selected });
+    }
+
+    handleDeselect() {
+        this.setState({ selected: false });
     }
 
     handleChange(e) {
-        this.props.onTextInput(e.target.value)
+        this.props.onTextInput(e.target.value);
     }
     render() {
-        let styles = {
-            border: '1px solid black',
-            height: '30px',
-            widht: '14%',
-            backgroundColor: 'gray',
-            color: 'white',
-            fontSize:'20px',
-            textAlign:'center'
-          };
-        return (
-            <input
-                // style={css}
-                // type="text"
-                // onBlur={this.onBlur}
-                // onKeyPress={this.onKeyPressOnInput}
+        let text;
+        if (this.state.selected) {
+            text = <input
                 value={this.props.value}
-                style={styles}
-                onChange={this.handleChange}
+                onChange={this.handleChange.bind(this)}
+                onFocus={this.handleFocus}
+                onClick={this.handleClick.bind(this)}
+                onBlur={this.handleDeselect.bind(this)}
                 autoFocus
             />
-
-        )
+        } else if (this.props.value === null){
+            text = <span
+                onClick={this.handleClick.bind(this)}
+                onBlur={this.handleDeselect.bind(this)}
+            >{'_________'}</span>
+        }else {
+            text = <span
+                onClick={this.handleClick.bind(this)}
+                onBlur={this.handleDeselect.bind(this)}
+            >{this.props.value}</span>
+        }
+        return (<td>{text}</td>)
     }
-
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import ActivityRow from './ActivityRow'
+import { Table } from 'react-bootstrap'
 
 function calculateTotalTime(start, end, pause) {
   var total = []
@@ -22,31 +23,31 @@ export default class ActivitySheet extends React.Component {
   render() {
     let rows = null;
     rows = (
-      <div>
-        {this.props.activeDays.map((day, index) => {
-          return <ActivityRow
-            date={day.date}
-            project={day.project}
-            start={day.start}
-            end={day.end}
-            pause={day.pause}
-            total={calculateTotalTime(day.start, day.end, day.pause)}
-            comment={day.comment}
-            onChangeProject={this.props.onChangeProject}
-            onChangeComment={this.props.onChangeComment}
-            onChangeStart={this.props.onChangeStart}
-            onChangeEnd={this.props.onChangeEnd}
-            onChangePause={this.props.onChangePause}
-            key={index}
-          />
-        })}
-      </div>
+
+      this.props.activeDays.map((day, index) => {
+        return <ActivityRow
+          date={day.date}
+          project={day.project}
+          start={day.start}
+          end={day.end}
+          pause={day.pause}
+          total={calculateTotalTime(day.start, day.end, day.pause)}
+          comment={day.comment}
+          onChangeProject={this.props.onChangeProject}
+          onChangeComment={this.props.onChangeComment}
+          onChangeStart={this.props.onChangeStart}
+          onChangeEnd={this.props.onChangeEnd}
+          onChangePause={this.props.onChangePause}
+          key={index}
+        />
+      })
+
     )
 
     return (
-      <div>
-        {rows}
-      </div>
+        <Table striped table-hover>
+          {rows}
+        </Table>
     )
   }
 }

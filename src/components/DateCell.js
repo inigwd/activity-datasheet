@@ -1,22 +1,13 @@
-import React from 'react'
+import React from 'react';
+import Moment from 'react-moment';
 
 export default class DateCell extends React.Component {
     render() {
-        let styles = {
-            border: '1px solid black',
-            height: '30px',
-            widht: '14%',
-            backgroundColor: 'gray',
-            color: 'white',
-            fontSize:'20px',
-            textAlign:'center'
-          };
+        const day = this.props.value
         return (
-            <input
-                value={this.props.value.join('-')}
-                style={styles}
-                readOnly
-            />
+            <td>
+                <Moment date={day} format="MMM DD YYYY ddd" />
+            </td>
         )
     }
 }

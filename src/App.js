@@ -1,6 +1,7 @@
 import React from 'react';
-import ActivitySheet from './components/ActivitySheet'
-import ActiveDay from './ActiveDay'
+import ActivitySheet from './components/ActivitySheet';
+import ActiveDay from './ActiveDay';
+import { Container } from 'react-bootstrap';
 
 
 const currentMonth = new Date()
@@ -50,85 +51,85 @@ export default class App extends React.Component {
     }
     //set new State
     this.setState({ activeDays: activeDays })
-}
+  }
 
-//updating state activeDays.start
-handleStartChange = e => {
-  const activeDays = [...this.state.activeDays]
-  //find existing activeDay
-  let foundday = false;
-  for (let i = 0; i < activeDays.length; i++) {
-    if (activeDays[i].date[0] === e.date[0]) {
-      if (activeDays[i].date[1] === e.date[1]) {
-        if (activeDays[i].date[2] === e.date[2]) {
-          foundday = true;
-          //else create new activeDay 
-          activeDays[i].start = e.start
-          break
+  //updating state activeDays.start
+  handleStartChange = e => {
+    const activeDays = [...this.state.activeDays]
+    //find existing activeDay
+    let foundday = false;
+    for (let i = 0; i < activeDays.length; i++) {
+      if (activeDays[i].date[0] === e.date[0]) {
+        if (activeDays[i].date[1] === e.date[1]) {
+          if (activeDays[i].date[2] === e.date[2]) {
+            foundday = true;
+            //else create new activeDay 
+            activeDays[i].start = e.start
+            break
+          }
         }
       }
     }
+    if (!foundday) {
+      //else create new activeDay 
+      activeDays.push(new ActiveDay(e.date, null, e.start, null, null, null))
+    }
+    //set new State
+    this.setState({ activeDays: activeDays })
   }
-  if (!foundday) {
-    //else create new activeDay 
-    activeDays.push(new ActiveDay(e.date, null, e.start, null, null, null))
-  }
-  //set new State
-  this.setState({ activeDays: activeDays })
-}
 
-//updating state activeDays.end
-handleEndChange = e => {
-  const activeDays = [...this.state.activeDays]
-  //find existing activeDay
-  let foundday = false;
-  for (let i = 0; i < activeDays.length; i++) {
-    if (activeDays[i].date[0] === e.date[0]) {
-      if (activeDays[i].date[1] === e.date[1]) {
-        if (activeDays[i].date[2] === e.date[2]) {
-          foundday = true;
-          //else create new activeDay 
-          activeDays[i].end = e.end
-          break
+  //updating state activeDays.end
+  handleEndChange = e => {
+    const activeDays = [...this.state.activeDays]
+    //find existing activeDay
+    let foundday = false;
+    for (let i = 0; i < activeDays.length; i++) {
+      if (activeDays[i].date[0] === e.date[0]) {
+        if (activeDays[i].date[1] === e.date[1]) {
+          if (activeDays[i].date[2] === e.date[2]) {
+            foundday = true;
+            //else create new activeDay 
+            activeDays[i].end = e.end
+            break
+          }
         }
       }
     }
+    if (!foundday) {
+      //else create new activeDay 
+      activeDays.push(new ActiveDay(e.date, null, null, e.end, null, null))
+    }
+    //set new State
+    this.setState({ activeDays: activeDays })
   }
-  if (!foundday) {
-    //else create new activeDay 
-    activeDays.push(new ActiveDay(e.date, null, null, e.end, null, null))
-  }
-  //set new State
-  this.setState({ activeDays: activeDays })
-}
 
-//updating state activeDays.pause
-handlePauseChange = e => {
-  const activeDays = [...this.state.activeDays]
-  //find existing activeDay
-  let foundday = false;
-  for (let i = 0; i < activeDays.length; i++) {
-    if (activeDays[i].date[0] === e.date[0]) {
-      if (activeDays[i].date[1] === e.date[1]) {
-        if (activeDays[i].date[2] === e.date[2]) {
-          foundday = true;
-          //else create new activeDay 
-          activeDays[i].pause = e.pause
-          break
+  //updating state activeDays.pause
+  handlePauseChange = e => {
+    const activeDays = [...this.state.activeDays]
+    //find existing activeDay
+    let foundday = false;
+    for (let i = 0; i < activeDays.length; i++) {
+      if (activeDays[i].date[0] === e.date[0]) {
+        if (activeDays[i].date[1] === e.date[1]) {
+          if (activeDays[i].date[2] === e.date[2]) {
+            foundday = true;
+            //else create new activeDay 
+            activeDays[i].pause = e.pause
+            break
+          }
         }
       }
     }
+    if (!foundday) {
+      //else create new activeDay 
+      activeDays.push(new ActiveDay(e.date, null, null, null, e.pause, null))
+    }
+    //set new State
+    this.setState({ activeDays: activeDays })
   }
-  if (!foundday) {
-    //else create new activeDay 
-    activeDays.push(new ActiveDay(e.date, null, null, null, e.pause, null))
-  }
-  //set new State
-  this.setState({ activeDays: activeDays })
-}
 
 
-    //updating state activeDays.comment
+  //updating state activeDays.comment
   handleCommentChange = e => {
     const activeDays = [...this.state.activeDays]
     //find existing activeDay
@@ -147,7 +148,7 @@ handlePauseChange = e => {
     }
     if (!foundday) {
       //else create new activeDay 
-      activeDays.push(new ActiveDay(e.date,null, null, null, null, e.text))
+      activeDays.push(new ActiveDay(e.date, null, null, null, null, e.text))
     }
     //set new State
     this.setState({ activeDays: activeDays })
@@ -158,7 +159,7 @@ handlePauseChange = e => {
 
     const month = [
       currentMonth.getFullYear(),
-      currentMonth.getMonth() + 1]
+      currentMonth.getMonth()]
     //creat state for one month from inicial month and data
     const rows = []
     const activeDaysMap = {}
@@ -183,17 +184,20 @@ handlePauseChange = e => {
     }
 
     return (
-      <div style={{ width: 'max-content' }}>
-        <ActivitySheet
-          month={month}
-          activeDays={rows}
-          onChangeProject={this.handleProjectChange.bind(this)}
-          onChangeComment={this.handleCommentChange.bind(this)}
-          onChangeStart={this.handleStartChange.bind(this)}
-          onChangeEnd={this.handleEndChange.bind(this)}
-          onChangePause={this.handlePauseChange.bind(this)}
-        />
-      </div>)
+      <Container fluid='true'>
+        <div>
+          <ActivitySheet
+            month={month}
+            activeDays={rows}
+            onChangeProject={this.handleProjectChange.bind(this)}
+            onChangeComment={this.handleCommentChange.bind(this)}
+            onChangeStart={this.handleStartChange.bind(this)}
+            onChangeEnd={this.handleEndChange.bind(this)}
+            onChangePause={this.handlePauseChange.bind(this)}
+          />
+        </div>
+      </Container>
+    )
   }
 }
 
@@ -202,4 +206,7 @@ function daysInThisMonth() {
   return new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
 }
 
-//TODO: change Handler for all components
+//TODO: - react moment
+//      - span conditional rendering
+//      - onBlur / onFocus
+//      - input select at onclick

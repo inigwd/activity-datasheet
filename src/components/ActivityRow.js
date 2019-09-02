@@ -4,6 +4,7 @@ import TextCell from './TextCell'
 import TimeCell from './TimeCell'
 import TotalCell from './TotalCell'
 
+
 export default class ActivityRow extends React.Component {
 
   //give the right date for event
@@ -25,10 +26,8 @@ export default class ActivityRow extends React.Component {
   render() {
 
     return (
-      <div>
-        <DateCell
-          value={this.props.date}
-        />
+      <tr>
+        <DateCell value={this.props.date} />
         <TextCell
           value={this.props.project}
           onTextInput={this.onChangeProject.bind(this)}
@@ -52,7 +51,7 @@ export default class ActivityRow extends React.Component {
           value={this.props.comment}
           onTextInput={this.onChangeComment.bind(this)}
         />
-      </div>
+      </tr>
     )
   }
 }
