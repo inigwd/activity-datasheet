@@ -45,7 +45,7 @@ export default class ActivitySheet extends React.Component {
     )
 
     return (
-        <Table striped table-hover>
+        <Table variant="dark" striped table-hover>
           {rows}
         </Table>
     )
